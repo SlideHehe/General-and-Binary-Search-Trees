@@ -12,14 +12,12 @@ using std::cout;
 using std::endl;
 using std::cerr;
 using TNodePtr = std::unique_ptr<TNode>; //Использование умных указателей на узлы дерева
-using List = std::vector<TNodePtr>; //Список состоящий из указателей на узлы
+using List = std::list<TNodePtr>; //Список состоящий из указателей на узлы
 using Vector = std::vector<int>;
 
 class TNode {
 public:
     TNode(int data, TNode *parent); //Конструктор для создания элемента на определенном узле
-
-    explicit TNode(int data); //Конструктор для создания элемента в качестве корня дерева
 
     TNode();
 
@@ -31,7 +29,17 @@ public:
 
     TNode *findByValue(int value);
 
-    void delByValue(int value);
+    TNode *findByValue(int value, int &shift); //Поиск элемента со смещением в shift элементов
+
+    Vector findPath(int value, Vector &paths);
+
+    int delByValue(int value);
+
+    int popLeaf();
+
+    int popLeaf(int &shift); //Выталкивание элемента со смещением в shift элементов
+
+    int findDepth(TNode *root);
 
     void printNode();
 
@@ -44,23 +52,27 @@ private:
 
 class Tree {
 public:
-    Tree(TNode *root); //Конструктор для создания дерева с корнем
-    
     Tree(); //Конструктор для создания пустого дерева
 
     ~Tree();
-    
+
     void changeRoot(TNodePtr newRoot);
 
     void push(int data, TNode *parent);
 
-    List pop();
+    void push(int data); //вставка корневого элемента
+
+    int pop();
+
+    int pop(int shift);
 
     void print();
 
     TNode *find(int data);
 
-    int getCount();
+    TNode *find(int data, int shift);
+
+    int getCount() const;
 
     int height();
 
@@ -68,7 +80,7 @@ public:
 
     void exclude(int value);
 
-    Vector path();
+    Vector path(int value);
 
     bool operator==(const Tree &otherTree) const;
 
