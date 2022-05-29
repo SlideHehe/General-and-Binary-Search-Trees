@@ -1,6 +1,7 @@
 #ifndef TESTS_H
 #define TESTS_H
 
+#include <cmath>
 #include <chrono>
 using ms = std::chrono::milliseconds;
 
