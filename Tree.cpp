@@ -71,10 +71,13 @@ int TNode::delByValue(int value) {
         TNode *currChild = iter->get(); //Создаем указатель на текущий эелент
         if (currChild->data == value) { //Если есть совпадение
             auto tmp = iter;
-            iter++;//переводим итератор к следующему элементу
-            delCount += currChild->children.size() + 1; //считаем какое количество элементов мы удалили
+            iter++;//переводим итератор к следующему
+
+            delCount += currChild->childCount();
 
             children.erase(tmp); //и стираем текущий элемент из списка детей
+            delCount++;
+
         } else iter++;
     }
 
@@ -147,6 +150,15 @@ void TNode::printNode() {
         child->printNode();
         cout << ")";
     }
+}
+
+int TNode::childCount() {
+    int childCount = 0;
+
+    for (TNodePtr &child: children)   // считаем количество детей у удаляемых элементов
+        childCount += child->childCount() + 1;
+
+    return childCount;
 }
 
 Tree::Tree() { //Конструктор для создания пустого дерева
@@ -247,12 +259,12 @@ void Tree::swap(Tree &otherTree) {
 void Tree::exclude(int value) {
     if (count > 0) {
         if (root->getData() == value) { //Если исключяем корень
-            root.reset(nullptr); //то очищаем список
+            root.release(); //то очищаем список
             count = 0;
 
             return;
         }
-        count = count - root->delByValue(value);
+        count -= root->delByValue(value);
     } else cerr << "Tree is empty\n";
 }
 

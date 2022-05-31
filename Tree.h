@@ -48,6 +48,8 @@ private:
     int data;
     TNode *parent;
     List children; //Делаем список указателей на детей узла
+
+    int childCount();
 };
 
 class Tree {
