@@ -14,106 +14,50 @@ void TestTree()
     root = t1.find(4);
     t1.push(6,root);
     t1.print();
-    cout << t1.height()<< " "<<t1.getCount()<<endl;
+    cout << "Tree height: "<<t1.height()<< ", Number of Tree nodes: "<<t1.getCount()<<endl;
 
-    //Vector vpath = t1.path(6);//прямой порядок обхода функции
-    //for (int i = 0; i < vpath.size(); i++) {
-    //    cout << vpath.at(i);
-    //}
+    Vector vpath = t1.path(6);//прямой порядок обхода функции
+    cout << "Path to node 6: ";
+    for (int i = 0; i < vpath.size(); i++) {
+        cout << vpath.at(i)<<" ";
+    cout<<endl;
+    }
    
 
-    /*cout<<t1.pop(3); t1.print();
-    cout<<t1.pop(1);
-    t1.print();*/
+    cout<<"Pop list: "<<t1.pop()<<endl; 
+    t1.print();
+    cout << "Pop list: " <<t1.pop(1)<<endl;
+    t1.print();
 
+    t1.exclude(3);
+    t1.print();
 
-    /*t2.push(1);
+    t2.push(1);
     TNode* root2 = t2.find(1);
     t2.push(2, root2);
     t2.push(3, root2);
-    t2.print();*/
+    t2.print();
 
-    /*t1.swap(t2);
+
+    t1.swap(t2);
     t1.print();
-    t2.print();*/
+    t2.print();
 
-    /*t1.exclude(3);
-    t1.print();*/
+    cout << "Number of Tree1 nodes <= Number of Tree2 nodes: "<<(t1 <= t2) << endl;
 
-    //cout << (t2 <= t1) << endl;
-
-    /*а)	push - вставка элемента в структуру(БД – упорядоченно, обычное - с указанием узла);
-    б)	pop - выталкивание элемента из структуры(Выталкивает лист);--смещение работает некорректно: работает только по одному уровню, иначе знчение не удаляет
+    /*
+    а)	push - вставка элемента в структуру(БД – упорядоченно, обычное - с указанием узла);
+    б)	pop - выталкивание элемента из структуры(Выталкивает лист);
     в)	find - поиск элемента в структуре;
     г)	count - возврат количества элементов в структуре;
     д)	height - возврат высоты дерева;
     е)	path - подсчёт длины пути от корня до указанного узла.Если узлов с указанным элементом более одного, вернуть множество длин до каждого из узлов.Т.е.если в дереве несколько узлов с элементом 5, и длина до каждого из них равна 3, 5, 8, то метод path вернёт{ 3, 5, 8 }.
-        ж)	print - вывод дерева в консоль(В preorder порядке);
+    ж)	print - вывод дерева в консоль(В preorder порядке);
     з)	балансировка - привести дерево к виду, в котором для каждого узла, высота в его левом и правом поддеревьях отличается не более чем на 1. Реализуется только для двоичного дерева.
     и)	динамический размер - размер структуры должен увеличиваться при необходимости;
     к)	операторы сравнения(> , < , != , etc) - объекты структур должны поддерживать операции лексикографического сравнения;*/
-    //changeRoot();--для чего?
     /*реализация обмена деревьями	
-    исключение узлов с указанным значением--не работает: некоторые узлы с поддеревьями и листья не обрабатываются: для рассматриваемой структуры 3,5,6*/
-
-
-    /*Tree tree1;
-    tree1.push(1);
-
-    TNode* root = tree1.find(1);
-
-    tree1.push(2, root);
-    cout << tree1.height() << endl;
-    tree1.push(3, root);
-    tree1.push(4, tree1.find(1));
-    tree1.print();
-
-    TNode* node1 = tree1.find(3);
-    for (int i = 0; i < 3; i++)
-        tree1.push(i, node1);
-    tree1.print();
-
-    TNode* node2 = tree1.find(2);
-    for (int i = 0; i < 3; i++)
-        tree1.push(i, node2);
-    tree1.print();
-
-    cout << tree1.pop(1) << endl;
-
-    TNode* shiftTest = tree1.find(1, 2);
-    tree1.push(99, shiftTest);
-    tree1.print();
-
-    Vector testPaths = tree1.path(2);
-    for (int i : testPaths)
-        cout << i << " ";
-    cout << endl;
-
-    tree1.exclude(2);
-    tree1.print();
-
-    cout << tree1.pop() << endl;
-    cout << tree1.getCount() << endl;
-    tree1.print();
-
-    cout << tree1.height() << endl;
-
-    cout << "\n\n";
-    tree1.print();
-
-    Tree tree2;
-    tree2.push(9);
-
-    TNode* root2 = tree2.find(9);
-    tree2.push(7, root2);
-    tree2.push(8, root2);
-    tree2.push(4, tree2.find(9));
-    tree2.print();
-
-    cout << "\n";
-    tree1.swap(tree2);
-    tree1.print();
-    tree2.print();*/
+    исключение узлов с указанным значением*/
 }
 
 void TestTimeTree()
@@ -154,9 +98,9 @@ void TestTimeTree()
 
     cout << t.getCount() << " " << t.height() << endl;
 
-    /*while (t.height() > 4) {
+    while (t.getCount() > 4) {
         t.pop();
-    }*/
+    }
 
     t.print();
 
