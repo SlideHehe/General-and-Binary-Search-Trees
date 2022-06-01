@@ -5,6 +5,7 @@
 #include <list>
 #include <memory>
 #include <vector>
+#include <cmath>
 
 class TNode;
 
@@ -17,7 +18,7 @@ using Vector = std::vector<int>;
 
 class TNode {
 public:
-    TNode(int data, TNode *parent); //Конструктор для создания элемента на определенном узле
+    TNode(int data); //Конструктор для создания элемента на определенном узле
 
     TNode();
 
@@ -39,14 +40,13 @@ public:
 
     int popLeaf(int &shift); //Выталкивание элемента со смещением в shift элементов
 
-    int findDepth(TNode *root);
+    int findDepth(TNodePtr &root);
 
     void printNode();
 
 
 private:
     int data;
-    TNode *parent;
     List children; //Делаем список указателей на детей узла
 
     int childCount();

@@ -1,18 +1,15 @@
 #include "Tree.h"
 
-TNode::TNode(int data, TNode *parent) { //Конструктор для создания элемента на определенном узле
+TNode::TNode(int data) { //Конструктор для создания элемента на определенном узле
     this->data = data;
-    this->parent = parent;
 }
 
 TNode::TNode() {
     data = 0;
-    parent = nullptr;
 }
 
 TNode::~TNode() {
     data = 0;
-    parent = nullptr;
     children.clear();
 }
 
@@ -129,14 +126,14 @@ int TNode::popLeaf(int &shift) { //Выталкивание элемента с�
     return -1;
 }
 
-int TNode::findDepth(TNode *root) {
-    if (root == nullptr) {
+int TNode::findDepth(TNodePtr &root) {
+    if (!root) {
         return 0;
     }
 
     int depth = 0;
     for (TNodePtr &child: root->children)
-        depth = std::fmaxf(depth, findDepth(child.get())); //находим максимальную высоту среди всех узлов
+        depth = fmax(depth, findDepth(child)); //находим максимальную высоту среди всех узлов
     return depth + 1;
 
 }
@@ -169,7 +166,7 @@ Tree::Tree() { //Конструктор для создания пустого �
 Tree::~Tree() = default;
 
 void Tree::push(int data, TNode *parent) { //вставка в произвольный узел
-    TNodePtr newChild = std::make_unique<TNode>(data, parent); //Создаем умный указатель на элемент
+    TNodePtr newChild = std::make_unique<TNode>(data); //Создаем умный указатель на элемент
 
     if (parent) //если не нулевой родитель
         if (count > 0) {
@@ -179,7 +176,7 @@ void Tree::push(int data, TNode *parent) { //вставка в произвол�
 }
 
 void Tree::push(int data) { //вставка корневого элемента
-    TNodePtr newChild = std::make_unique<TNode>(data, nullptr); //Создаем умный указатель на элемент
+    TNodePtr newChild = std::make_unique<TNode>(data); //Создаем умный указатель на элемент
 
     root.swap(newChild); //Меняем местами указатели на указанный узел и корень
     count = 1;
@@ -249,7 +246,7 @@ TNode *Tree::find(int data, int shift) {
 
 int Tree::getCount() const { return count; }
 
-int Tree::height() { return root->findDepth(root.get()); } //передаем указатель на узел TNode
+int Tree::height() { return root->findDepth(root); } //передаем указатель на узел TNode
 
 void Tree::swap(Tree &otherTree) {
     root.swap(otherTree.root); //меняем местами объекты у умных указателей
@@ -259,7 +256,7 @@ void Tree::swap(Tree &otherTree) {
 void Tree::exclude(int value) {
     if (count > 0) {
         if (root->getData() == value) { //Если исключяем корень
-            root.release(); //то очищаем список
+            root.reset(nullptr); //то очищаем список
             count = 0;
 
             return;

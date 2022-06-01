@@ -108,3 +108,74 @@ void TestTimeTree()
     auto written_Tree_res = std::chrono::duration_cast<ms>(written_Tree_end - written_Tree_start).count();
     cout << "----------------------------------\nExecution time of the written Tree: " << written_Tree_res << " ms" << endl << endl;
 }
+
+void TestBSTree() {
+
+//    BSTree test;
+//
+//    test.push(5);
+//    test.print();
+//
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//    test.push(2);
+//    test.push(8);
+//    test.print();
+//
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//    test.push(4);
+//    test.push(6);
+//    test.push(2);
+//    test.print();
+//
+//    Vector paths = test.path(2);
+//    cout << "paths: ";
+//    for (int i: paths) {
+//        cout << i << " ";
+//    }
+//    cout << "\nHeight: " << test.height() << " Count: " << test.getCount() << endl;
+//
+//    BSTNode *check = test.find(2, 1);
+//    cout << "Find check: " << check->getData() << endl;
+//
+//    test.exclude(2);
+//    test.print();
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//
+//    test.push(4);
+//    test.push(10);
+//    test.print();
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//
+//    cout << "Pop: " << test.pop(2) << endl;
+//    test.print();
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//
+//    BSTree testSwap;
+//
+//    testSwap.push(1);
+//    testSwap.push(2);
+//    testSwap.push(3);
+//    testSwap.push(4);
+//    testSwap.print();
+//    cout << "SHeight: " << testSwap.height() << " SCount: " << testSwap.getCount() << endl;
+//
+//    test.swap(testSwap);
+//
+//    test.print();
+//    cout << "Height: " << test.height() << " Count: " << test.getCount() << endl;
+//
+//    testSwap.print();
+//    cout << "SHeight: " << testSwap.height() << " SCount: " << testSwap.getCount() << endl;
+
+//    BSTree balanceTest;
+//
+//    balanceTest.push(1);
+//    balanceTest.push(2);
+//    balanceTest.push(3);
+//    balanceTest.push(4);
+//    balanceTest.push(5);
+//    balanceTest.print();
+//
+//    balanceTest.treeBalance();
+//    balanceTest.print();
+}

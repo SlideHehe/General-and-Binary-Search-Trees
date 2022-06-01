@@ -5,6 +5,7 @@
 using ms = std::chrono::milliseconds;
 
 #include "Tree.h"
+#include "BSTree.h"
 
 //#include 
 
@@ -15,6 +16,8 @@ using ms = std::chrono::milliseconds;
 
 void TestTree();
 void TestTimeTree();
+
+void TestBSTree();
 
 
 
