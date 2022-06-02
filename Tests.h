@@ -9,16 +9,19 @@ using ms = std::chrono::milliseconds;
 
 //#include 
 
-#define N 5
+#define N 8//3290
 #define ii 1
-#define form 1//Формат дерева 0: (ii ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) )  ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) ) ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) )) - для бинарного по два поддерева
-		   //Формат дерева 1: (ii ( ii+1 ) ( ii+1 ( ii+2) ( ii+2 ( ii+3 ) ( ii+3 (...) (...) ) ) ) )
+#define form 0
+		   //Формат 0 для : дерева: (ii ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) )  ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) ) ( ii*2 ( ii*3(...)) (ii*3(...)) (ii*3(...)) )) - для бинарного по два поддерева
+		   //               бинарного дерева:  (1000+ii/2 ( 1000+ii/2-1 ( 1000+ii/2-2 (...) ) ) (1000+ii/2+1 ( 1000+ii/2+2 (...) ) ) )
+		   //Формат 1 для : дерева: (ii ( ii+1 ) ( ii+1 ( ii+2) ( ii+2 ( ii+3 ) ( ii+3 (...) (...) ) ) ) )
+		   //				бинарного дерева:	(ii (ii+1 ( ii+1 )( ii+2 ( ii+2 ) ( ii+3 ( ii+3 ) (...) ) ) ) )
 
 void TestTree();
 void TestTimeTree();
 
 void TestBSTree();
-
+void TestTimeBSTree();
 
 
 #endif //TESTS_H
