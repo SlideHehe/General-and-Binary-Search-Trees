@@ -19,11 +19,11 @@ BSTNode::~BSTNode() {
 
 int BSTNode::getData() const { return data; }
 
-BSTNode *BSTNode::findByValue(int value) {
-    if (left->data == value) return left.get();
-    if (right->data == value) return right.get();
+BSTNode* BSTNode::findByValue(int value) {
+    if (left != nullptr && left->data == value) return left.get();
+    if (right != nullptr && right->data == value) return right.get();
 
-    BSTNode *tmp;
+    BSTNode* tmp;
 
     if (left) {
         tmp = left->findByValue(value);
@@ -38,7 +38,7 @@ BSTNode *BSTNode::findByValue(int value) {
     return nullptr;
 }
 
-BSTNode *BSTNode::findByValue(int value, int &shift) { //Поиск элемента со смещением в shift элементов
+BSTNode* BSTNode::findByValue(int value, int& shift) { //Поиск элемента со смещением в shift элементов
     if (left && left->data == value) {
         if (!shift) return left.get();
         else shift--;
@@ -49,7 +49,7 @@ BSTNode *BSTNode::findByValue(int value, int &shift) { //Поиск элемен
         else shift--;
     }
 
-    BSTNode *tmp;
+    BSTNode* tmp;
 
     if (left) {
         tmp = left->findByValue(value, shift);
@@ -64,7 +64,7 @@ BSTNode *BSTNode::findByValue(int value, int &shift) { //Поиск элемен
     return nullptr;
 }
 
-Vector BSTNode::findPath(int value, Vector &paths) {
+Vector BSTNode::findPath(int value, Vector& paths) {
     paths.at(0)++; //вычисляем текущий уровень
 
     if (left && left->data == value) paths.push_back(paths.at(0));
@@ -101,7 +101,7 @@ int BSTNode::delByValue(int value) {
 
 }
 
-void BSTNode::pushLeaf(int value, BSTNodePtr &root) {
+void BSTNode::pushLeaf(int value, BSTNodePtr& root) {
     if (!root) { //Если корня нет
         BSTNodePtr newChild = std::make_unique<BSTNode>(value);
         root.swap(newChild);//То создаем его
@@ -113,7 +113,7 @@ void BSTNode::pushLeaf(int value, BSTNodePtr &root) {
 }
 
 
-int BSTNode::popLeaf(BSTNodePtr &root) {
+int BSTNode::popLeaf(BSTNodePtr& root) {
     int tmp;
 
     if (!root->left && !root->right) {
@@ -121,12 +121,12 @@ int BSTNode::popLeaf(BSTNodePtr &root) {
         root.reset(nullptr);
         return tmp;
     }
-
+    //else
     if (root->left) {
         tmp = popLeaf(root->left);
         if (tmp != -1) return tmp;
     }
-
+    //else
     if (root->right) {
         tmp = popLeaf(root->right);
         if (tmp != -1) return tmp;
@@ -135,7 +135,7 @@ int BSTNode::popLeaf(BSTNodePtr &root) {
     return -1;
 }
 
-int BSTNode::popLeaf(int &shift, BSTNodePtr &root) { //Выталкивание элемента со смещением в shift элементов
+int BSTNode::popLeaf(int& shift, BSTNodePtr& root) { //Выталкивание элемента со смещением в shift элементов
     int tmp;
 
     if (!root->left && !root->right) {
@@ -143,7 +143,8 @@ int BSTNode::popLeaf(int &shift, BSTNodePtr &root) { //Выталкивание 
             tmp = root->data;
             root.reset(nullptr);
             return tmp;
-        } else shift--;
+        }
+        else shift--;
     }
 
     if (root->left) {
@@ -159,7 +160,7 @@ int BSTNode::popLeaf(int &shift, BSTNodePtr &root) { //Выталкивание 
     return -1;
 }
 
-int BSTNode::findDepth(BSTNodePtr &root) {
+int BSTNode::findDepth(BSTNodePtr& root) {
     if (!root) {
         return 0;
     }
@@ -188,7 +189,7 @@ void BSTNode::printNode() {
     }
 }
 
-void BSTNode::arrayConv(Vector &tmp, BSTNodePtr &root) { //функция для преобразования дерева в отсортированный массив
+void BSTNode::arrayConv(Vector& tmp, BSTNodePtr& root) { //функция для преобразования дерева в отсортированный массив
     if (!root) return;
 
     arrayConv(tmp, root->left);
@@ -223,7 +224,8 @@ int BSTree::pop() {
     if (count > 0) {
         count--;
         return root->popLeaf(root);
-    } else cerr << "BSTree is empty\n";
+    }
+    else cerr << "BSTree is empty\n";
 
     return -1;
 }
@@ -234,7 +236,8 @@ int BSTree::pop(int shift) {
         int tmp = root->popLeaf(shift, root);
         if (tmp != -1) return tmp;
         else cerr << "Such element doesn't exist\n";
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 
     return -1;
 }
@@ -244,12 +247,13 @@ void BSTree::print() {
         cout << "( ";
         root->printNode();
         cout << ")\n";
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 }
 
-BSTNode *BSTree::find(int data) {
+BSTNode* BSTree::find(int data) {
     if (count > 0) {
-        BSTNode *ret;
+        BSTNode* ret;
 
         if (root->getData() == data)
             return root.get(); //Если корень совпадает, возвращаем его значение
@@ -257,26 +261,29 @@ BSTNode *BSTree::find(int data) {
         ret = root->findByValue(data);
         if (ret) return ret;
         else cerr << "Such element doesn't exist\n";
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 
     return nullptr;
 }
 
-BSTNode *BSTree::find(int data, int shift) {
+BSTNode* BSTree::find(int data, int shift) {
     if (count > 0) {
-        BSTNode *ret;
+        BSTNode* ret;
 
         if (root->getData() == data) {
             if (!shift) {
                 return root.get();
-            } else shift--;
+            }
+            else shift--;
         }
         ret = root->findByValue(data, shift);
 
         if (ret) return ret;
         else cerr << "Such element doesn't exist\n";
 
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 
     return nullptr;
 }
@@ -285,7 +292,7 @@ int BSTree::getCount() const { return count; }
 
 int BSTree::height() { return root->findDepth(root); }
 
-void BSTree::swap(BSTree &otherTree) {
+void BSTree::swap(BSTree & otherTree) {
     root.swap(otherTree.root); //меняем местами объекты у умных указателей
     std::swap(count, otherTree.count);
 }
@@ -299,11 +306,12 @@ void BSTree::exclude(int value) {
             return;
         }
         count = count - root->delByValue(value);
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 }
 
 Vector BSTree::path(int value) {
-    Vector paths = {0}; //0-ой элемент вектора требуется для хранения длины пути
+    Vector paths = { 0 }; //0-ой элемент вектора требуется для хранения длины пути
 
     if (count > 0) {
         if (root->getData() == value)
@@ -315,7 +323,8 @@ Vector BSTree::path(int value) {
             cerr << "Such element doesn't exist\n";
         }
         return paths;
-    } else cerr << "Tree is empty\n";
+    }
+    else cerr << "Tree is empty\n";
 
     paths.erase(paths.begin());
     return paths;
@@ -336,14 +345,14 @@ void BSTree::treeBalance() {
     swap(balancedTree); // заменяем дерево на созданное
 }
 
-bool BSTree::operator==(const BSTree &otherTree) const { return (count == otherTree.count); }
+bool BSTree::operator==(const BSTree & otherTree) const { return (count == otherTree.count); }
 
-bool BSTree::operator!=(const BSTree &otherTree) const { return (count != otherTree.count); }
+bool BSTree::operator!=(const BSTree & otherTree) const { return (count != otherTree.count); }
 
-bool BSTree::operator>(const BSTree &otherTree) const { return (count > otherTree.count); }
+bool BSTree::operator>(const BSTree & otherTree) const { return (count > otherTree.count); }
 
-bool BSTree::operator>=(const BSTree &otherTree) const { return (count >= otherTree.count); }
+bool BSTree::operator>=(const BSTree & otherTree) const { return (count >= otherTree.count); }
 
-bool BSTree::operator<(const BSTree &otherTree) const { return (count < otherTree.count); }
+bool BSTree::operator<(const BSTree & otherTree) const { return (count < otherTree.count); }
 
-bool BSTree::operator<=(const BSTree &otherTree) const { return (count <= otherTree.count); }
+bool BSTree::operator<=(const BSTree & otherTree) const { return (count <= otherTree.count); }
