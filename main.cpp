@@ -2,8 +2,11 @@
 
 int main() {
 
-    //TestTree();
-    //TestTimeTree();
+   //TestTree();
+   //TestTimeTree();
+
+    //TestBSTree();
+    TestTimeBSTree();
 
     return 0;
 }
