@@ -2,8 +2,8 @@
 
 int main() {
 
-   //TestTree();
-   //TestTimeTree();
+    //TestTree();
+    //TestTimeTree();
 
     //TestBSTree();
     TestTimeBSTree();

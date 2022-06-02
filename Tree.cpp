@@ -133,7 +133,7 @@ int TNode::findDepth(TNodePtr &root) {
 
     int depth = 0;
     for (TNodePtr &child: root->children)
-        depth = fmax(depth, findDepth(child)); //находим максимальную высоту среди всех узлов
+        depth = std::fmax(depth, findDepth(child)); //находим максимальную высоту среди всех узлов
     return depth + 1;
 
 }

@@ -42,7 +42,7 @@ public:
 
     void printNode();
 
-    void arrayConv(Vector &tmp, BSTNodePtr &root); //функция для преобразования дерева в отсортированный массив
+    void arrayConv(Vector &tmp, BSTNodePtr &root); //функция для преобразования дерева в массив
 
 
 private:
@@ -97,6 +97,8 @@ public:
 private:
     BSTNodePtr root;
     int count;
+
+    void arrayToBSTree(BSTree &store, Vector &array, int left, int right);
 };
 
 #endif //BSTREE_H
