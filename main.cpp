@@ -6,7 +6,7 @@ int main() {
     //TestTimeTree();
 
     //TestBSTree();
-    TestTimeBSTree();
+    //TestTimeBSTree();
 
     return 0;
 }

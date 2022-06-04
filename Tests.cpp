@@ -16,9 +16,9 @@
 
    /*
    Временные тесты:
-       1.Формирование дерева формата form высотой N
+       1.Формирование дерева формата form и высотой N
        2.Вывод высоты и количества элементов
-       3.Выталкивание листьев до высоты 4
+       3.Выталкивание листьев до количества 4
        4.Вывод дерева
   */
 
@@ -75,8 +75,8 @@ void TestTimeTree()
 
     Tree t;
     if (N > 0) {
-        t.push(ii);
         if (form == 0) {
+            t.push(ii);
             for (int i = 1; i < N; i++) {
                 for (int j = 0; j < pow(3, i - 1); j++) {
                     TNode* ptr = t.find(ii * i, j);
@@ -87,12 +87,11 @@ void TestTimeTree()
             }
         }
         if (form == 1 && N > 1) {
+            t.push(ii);
             TNode* ptr = t.find(ii);
-            t.push(ii + 1, ptr);
-            t.push(ii + 1, ptr);
-            for (int i = 2; i < N; i++) {
-                ptr = t.find(ii + i - 1, 1);
+            for (int i = 1; i < N; i++) {
                 t.push(ii + i, ptr);
+                ptr = t.find(ii + i);
                 t.push(ii + i, ptr);
             }
         }
@@ -118,7 +117,6 @@ void TestBSTree() {
     t1.push(10);
     t1.push(2);
     t1.push(3);
-    t1.print();
     t1.push(1);
     t1.push(5);
     t1.push(2);
@@ -151,15 +149,14 @@ void TestBSTree() {
     t2.print();
 
     cout << "Number of Tree1 nodes <= Number of Tree2 nodes: " << (t1 <= t2) << endl;
-
+ 
     t2.push(1);
     t2.push(2);
     t2.push(3);
     t2.push(4);
     t2.push(5);
     t2.print();
-    t2.treeBalance();//error--балансировка - привести дерево к виду, в котором для каждого!!! узла, высота в его левом и правом поддеревьях отличается не более чем на 1.
-    //+повторение узла 4
+    t2.treeBalance();
     t2.print();
 
 }
@@ -170,17 +167,16 @@ void TestTimeBSTree() {
 
     BSTree t;
     if (N > 0) {
-        t.push((1000+ii)/2);
         if (form == 0) {
+            t.push((1000 + ii) / 2);
             for (int i = 1; i < N; i++) {
                     t.push((1000 + ii) / 2 - i);
                     t.push((1000 + ii) / 2 + i);
             }
         }
         if (form == 1 && N > 1) {
-            t.push(ii + 1);
-            t.push(ii + 1);
-            for (int i = 2; i < N; i++) {
+            t.push(ii);
+            for (int i = 1; i < N; i++) {
                 t.push(ii + i);
                 t.push(ii + i);
             }
