@@ -89,7 +89,7 @@ void TestTimeTree()
         if (form == 1 && N > 1) {
             t.push(ii);
             TNode* ptr = t.find(ii);
-            for (int i = 1; i < N; i++) {
+            for (int i = 2; i < N; i++) {
                 t.push(ii + i, ptr);
                 ptr = t.find(ii + i);
                 t.push(ii + i, ptr);
@@ -176,7 +176,7 @@ void TestTimeBSTree() {
         }
         if (form == 1 && N > 1) {
             t.push(ii);
-            for (int i = 1; i < N; i++) {
+            for (int i = 2; i < N; i++) {
                 t.push(ii + i);
                 t.push(ii + i);
             }
