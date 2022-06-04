@@ -85,8 +85,7 @@ int TNode::delByValue(int value) {
 }
 
 int TNode::popLeaf() {
-    for (auto iter = children.begin();
-         iter != children.end(); iter++) { //используем итератор для прохода по списку
+    for (auto iter = children.begin(); iter != children.end(); iter++) { //используем итератор для прохода по списку
         int tmp; //переменная для сохранения выталкиваемого значения
         TNode *currChild = iter->get();
 
